@@ -1,13 +1,28 @@
 dbt_k8_demo:
   outputs:
-    default:
+    #this profile for exec with docker
+    devDockerK8:
       type: bigquery
-      dataset: dbt_k8_demo
+      dataset: dgt_govil_dbt_stg
       fixed_retries: 1
-      location: europe-west2
+      location: europe-west3
       method: oauth
       priority: interactive
-      project: rocketech-de-pgcp-sandbox
+      project: govilgil
       threads: 5
       timeout_seconds: 300
-      impersonate_service_account: dbt-user@rocketech-de-pgcp-sandbox.iam.gserviceaccount.com
+      impersonate_service_account: dbt-user@govilgil.iam.gserviceaccount.com
+
+    #this profile for exec local pc with service-account
+    DevServiceAccount: 
+      type: bigquery
+      method: service-account
+      project: govilgil
+      dataset: dgt_govil_dbt_stg
+      threads: 1
+      keyfile: 'C:\Users\gilc\.dbt\keyfile.json'
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
+
+  target: DevServiceAccount
