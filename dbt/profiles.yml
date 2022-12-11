@@ -14,7 +14,7 @@ dbt_k8_demo:
       impersonate_service_account: dbt-user@govilgil.iam.gserviceaccount.com
 
     #this profile for exec local pc with service-account
-    DevServiceAccount: 
+    DevServiceAccount:
       type: bigquery
       method: service-account
       project: govilgil
