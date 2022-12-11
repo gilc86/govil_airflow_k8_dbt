@@ -1,4 +1,4 @@
-FROM python:3.8.13
+FROM python:3.9.5
 
 ARG DBT_HOME=/home/dbtuser
 
@@ -25,7 +25,7 @@ ENV VIRTUAL_ENV=${DBT_HOME}/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN pip install dbt-core==1.0.4 dbt-bigquery==1.0.0
+RUN pip install dbt-core==1.3.1 dbt-bigquery==1.3.0
 
 COPY --chown=dbtuser:dbtuser ./dbt/profiles.yml ${DBT_HOME}/.dbt
-COPY --chown=dbtuser:dbtuser ./dbt/dbt_k8_demo ${DBT_HOME}/dbt_k8_demo
+COPY --chown=dbtuser:dbtuser ./dbt/dgt_govil_dbt ${DBT_HOME}/dbt_k8_demo
