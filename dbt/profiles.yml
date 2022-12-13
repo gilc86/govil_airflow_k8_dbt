@@ -33,4 +33,15 @@ dbt_k8_demo:
       timeout_seconds: 300
       priority: interactive
       retries: 1
-  target: TestServiceAccount
+    TestDockerK8:
+      type: bigquery
+      dataset: dgt_govil_dbt_stg
+      fixed_retries: 1
+      location: europe-west3
+      method: oauth
+      priority: interactive
+      project: dgt-gcp-egov-test-govilbi-0
+      threads: 5
+      timeout_seconds: 300
+      impersonate_service_account: dbt-user@govilgil.iam.gserviceaccount.com
+  target: TestDockerK8
