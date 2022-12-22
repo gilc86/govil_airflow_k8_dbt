@@ -43,5 +43,5 @@ dbt_k8_demo:
       project: dgt-gcp-egov-test-govilbi-0
       threads: 5
       timeout_seconds: 300
-      impersonate_service_account: dbt-user@dgt-gcp-egov-test-govilbi-0.gserviceaccount.com
+      impersonate_service_account: dbt-user@dgt-gcp-egov-test-govilbi-0.iam.gserviceaccount.com
   target: TestDockerK8
