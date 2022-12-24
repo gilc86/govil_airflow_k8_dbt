@@ -19,19 +19,17 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=['1.0.1']
+        tags=['1.0.0']
 ) as dag:
     dbt_run = KubernetesPodOperator(
         namespace="k8-executor",  # the new namespace you've created in the Workload Identity creation process
         service_account_name="composer1", # the new k8 service account you've created in the Workload Identity creation process
-        image="eu.gcr.io/dgt-gcp-egov-test-govilbi-0/dgt_govil_dbt@sha256:1ab9f936fcf3c90c7304449278ecb1a8146095c6cce54015bb462d89bc579b96",
+        image="eu.gcr.io/dgt-gcp-egov-test-govilbi-0/dgt_govil_dbt:1.0.0",
+        # image="eu.gcr.io/dgt-gcp-egov-test-govilbi-0/dgt_govil_dbt@sha256:1ab9f936fcf3c90c7304449278ecb1a8146095c6cce54015bb462d89bc579b96",
         # startup_timeout_seconds=500,
         cmds=["bash", "-cx"],
         # arguments=["cd" , "./dbt/dgt_govil_dbt" , "&& dbt run"], #Liad & Oded
         arguments=["cd /home/dbtuser/dgt_govil_dbt && dbt run"], #Leedor
-        # arguments=["cd /home/dbtuser/dgt_govil_dbt ", "&& dbt run"], #Gil & Yoel
-        # arguments=["ll"], #Gil & Yoel
-        # arguments=["cd './dbt/dgt_govil_dbt' && dbt run"],
         labels={"foo": "bar"},
         name="dgt_govil_dbt",
         task_id="run_job_on_dgt_govil_dbt",
