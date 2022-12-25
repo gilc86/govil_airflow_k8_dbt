@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 DBT_DIR = './dbt/dgt_govil_dbt'
+V_TAG = '1.0.0'
 with DAG(
         'dgt_govil_dbt',
         # These args will get passed on to each operator
@@ -19,12 +20,12 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=['1.0.0']
+        tags=[V_TAG]
 ) as dag:
     dbt_run = KubernetesPodOperator(
         namespace="k8-executor",  # the new namespace you've created in the Workload Identity creation process
         service_account_name="composer1", # the new k8 service account you've created in the Workload Identity creation process
-        image="eu.gcr.io/dgt-gcp-egov-test-govilbi-0/dgt_govil_dbt:1.0.0",
+        image="eu.gcr.io/dgt-gcp-egov-test-govilbi-0/dgt_govil_dbt:"+V_TAG,
         # image="eu.gcr.io/dgt-gcp-egov-test-govilbi-0/dgt_govil_dbt@sha256:1ab9f936fcf3c90c7304449278ecb1a8146095c6cce54015bb462d89bc579b96",
         # startup_timeout_seconds=500,
         cmds=["bash", "-cx"],
