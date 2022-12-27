@@ -43,5 +43,4 @@ with DAG(
         get_logs=True,
         dag=dag
     )
-
     dbt_run.dry_run()
