@@ -1,9 +1,14 @@
 from datetime import datetime, timedelta
-
+import json
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
-DBT_DIR = './dbt/dgt_govil_dbt'
-DGT_AIRFLOW_DBT_TAG = '1.0.0'
+
+gcs_json_path = "/home/airflow/gcs/dags/config_dgt_airflow_k8_dbt.json"
+with open(gcs_json_path) as config_file:
+    dataConfig = json.load(config_file)
+DGT_AIRFLOW_DBT_TAG = dataConfig['Tag_Version']
+# DGT_AIRFLOW_DBT_TAG = '1.0.0'
+
 with DAG(
         'dgt_govil_dbt',
         # These args will get passed on to each operator
@@ -20,7 +25,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=[DGT_AIRFLOW_DBT_TAG]
+        tags=['1.0.0']
 ) as dag:
     dbt_run = KubernetesPodOperator(
         namespace="k8-executor",  # the new namespace you've created in the Workload Identity creation process
