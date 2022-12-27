@@ -25,7 +25,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=['1.0.0']
+        tags=['''+DGT_AIRFLOW_DBT_TAG+''']
 ) as dag:
     dbt_run = KubernetesPodOperator(
         namespace="k8-executor",  # the new namespace you've created in the Workload Identity creation process
