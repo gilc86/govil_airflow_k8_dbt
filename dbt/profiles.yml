@@ -12,7 +12,7 @@ dbt_k8_demo:
       threads: 5
       timeout_seconds: 300
       impersonate_service_account: dbt-user@govilgil.iam.gserviceaccount.com
-    #this profile for exec local pc with service-account
+    # This profile is for exec local pc with service-account to DEV
     DevServiceAccount:
       type: bigquery
       method: service-account
@@ -23,13 +23,14 @@ dbt_k8_demo:
       timeout_seconds: 300
       priority: interactive
       retries: 1
+    # This profile is for exec local pc with service-account to TEST
     TestServiceAccount:
       type: bigquery
       method: service-account
       project: dgt-gcp-egov-test-govilbi-0
       dataset: dgt_govil_dbt_stg
       threads: 1
-      keyfile: 'C:\Users\gilc\.dbt\keyfile_TestServiceAccount.json'
+      keyfile: 'C:\Users\yoelp\.dbt\keyfile_TestServiceAccount.json'
       timeout_seconds: 300
       priority: interactive
       retries: 1
@@ -37,11 +38,11 @@ dbt_k8_demo:
       type: bigquery
       dataset: dgt_govil_dbt_stg
       fixed_retries: 1
-      location: europe-west3
+      location: me-west1
       method: oauth
       priority: interactive
       project: dgt-gcp-egov-test-govilbi-0
       threads: 5
       timeout_seconds: 300
       impersonate_service_account: dbt-user@dgt-gcp-egov-test-govilbi-0.iam.gserviceaccount.com
-  target: TestDockerK8
+  target: TestServiceAccount

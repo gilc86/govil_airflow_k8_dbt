@@ -25,7 +25,11 @@ ENV VIRTUAL_ENV=${DBT_HOME}/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN pip install dbt-core==1.3.1 dbt-bigquery==1.3.0
+
+RUN pip install --upgrade pip wheel setuptools
+
+# RUN pip install dbt-core==1.3.1 dbt-bigquery==1.3.0
+RUN pip install dbt-bigquery
 
 COPY --chown=dbtuser:dbtuser ./dbt/profiles.yml ${DBT_HOME}/.dbt
 COPY --chown=dbtuser:dbtuser ./dbt/dgt_govil_dbt ${DBT_HOME}/dgt_govil_dbt
