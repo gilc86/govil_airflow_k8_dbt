@@ -1,3 +1,6 @@
 {
-   "Tag_Version": "1.0.0"
+   "Tag_Version": "1.0.0",
+   "ProjectGCP_Id": "dgt-gcp-egov-test-govilbi-0",
+   "artifact_registry": "",
+   "registry_ProjectName": ""
 }
